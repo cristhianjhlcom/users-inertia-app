@@ -7,5 +7,4 @@ Route::inertia('/', 'Public/Index');
 Route::inertia('/about', 'Public/About');
 Route::inertia('/contact', 'Public/Contact');
 
-Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
-Route::get('/admin/users/{user}', [UserController::class, 'show'])->name('admin.users.show');
+Route::resource('/admin/users', UserController::class)->only(['index', 'show', 'create', 'edit', 'store', 'update', 'destroy']);

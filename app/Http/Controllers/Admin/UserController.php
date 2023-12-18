@@ -23,5 +23,14 @@ class UserController extends Controller
 
         return Inertia::render('Admin/Users/Show', compact('user'));
     }
-}
 
+    public function create(): Response
+    {
+        return Inertia::render('Admin/Users/Create');
+    }
+
+    public function edit(User $user): Response
+    {
+        return Inertia::render('Admin/Users/Edit', compact('user'));
+    }
+}
