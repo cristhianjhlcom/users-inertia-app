@@ -2,24 +2,36 @@ import { Link } from "@inertiajs/react";
 
 export default function PublicLayout({ children }) {
     return (
-        <>
+        <div className="bg-gray-200 dark:bg-gray-900 text-gray-800 dark:text-gray-100 space-y-6 h-full">
             <header>
-                <nav>
-                    <Link href="/">Home</Link>
-                    <Link href="/about">About</Link>
-                    <Link href="/contact">Contact</Link>
+                <nav className="max-w-6xl py-4 mx-auto flex items-center justify-start gap-x-4">
+                    <Link
+                        className="text-gray-800 dark:text-gray-100 font-bold"
+                        href="/"
+                    >
+                        Home
+                    </Link>
+                    <Link
+                        className="text-gray-800 dark:text-gray-100 font-bold"
+                        href="/about"
+                    >
+                        About
+                    </Link>
+                    <Link
+                        className="text-gray-800 dark:text-gray-100 font-bold"
+                        href="/contact"
+                    >
+                        Contact
+                    </Link>
+                    <Link
+                        className="text-gray-800 dark:text-gray-100 font-bold"
+                        href="/admin/users"
+                    >
+                        Users
+                    </Link>
                 </nav>
             </header>
-            <main>{children}</main>
-            <iframe
-                width="560"
-                height="315"
-                src="https://www.youtube.com/embed/aSWEgciWWKY?si=cU7T5Q0XLI_zzcxk&amp;controls=0"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullScreen
-            ></iframe>
-        </>
+            <main className="max-w-6xl mx-auto space-y-4">{children}</main>
+        </div>
     );
 }

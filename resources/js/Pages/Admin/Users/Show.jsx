@@ -1,31 +1,36 @@
-export default function Show({ user }) {
-    const { username, email } = user;
+function Content({ title, text }) {
     return (
-        <div class="max-w-md h-full mx-auto mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2 bg-white dark:bg-gray-800">
-            <figure class="flex flex-col items-center justify-center p-8 text-center bg-white border-gray-200 rounded-b-lg md:rounded-se-lg dark:bg-gray-800 dark:border-gray-700">
-                <blockquote class="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Efficient Collaborating
-                    </h3>
-                    <p class="my-4">
-                        You have many examples that can be used to create a fast
-                        prototype for your team."
-                    </p>
-                </blockquote>
-                <figcaption class="flex items-center justify-center ">
-                    <img
-                        class="rounded-full w-9 h-9"
-                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
-                        alt="profile picture"
-                    />
-                    <div class="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3">
-                        <div>{username}</div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400">
-                            {email}
-                        </div>
-                    </div>
-                </figcaption>
-            </figure>
+        <div className="space-y-2">
+            <h3 className="text-md font-bold tracking-tight text-gray-900 dark:text-white">{title}</h3>
+            <p className="font-normal text-gray-700 dark:text-gray-400">{text}</p>
         </div>
+    );
+}
+
+export default function Show({ user }) {
+    const { firstName, lastName, bio, job, company, email, phone, address } =
+        user;
+
+    return (
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-x-2">
+            <aside className="col-span-1 p-6 space-y-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div className="space-y-4">
+                    <h2 className="text-2xl font-bold tracking-tight text-blue-900 dark:text-blue-500">
+                        {firstName} {lastName}
+                    </h2>
+                    <span className="font-normal text-gray-700 dark:text-gray-400">{job}</span>
+                </div>
+                <div className="space-y-4">
+                    <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Main Information</h2>
+                    <Content title="Personal Email" text={email} />
+                    <Content title="Personal Phone" text={phone} />
+                    <Content title="Address" text={address} />
+                    <Content title="Company Name" text={company} />
+                </div>
+            </aside>
+            <article className="col-span1 md:col-span-2 p-6 space-y-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <Content title="Biography" text={bio} />
+            </article>
+        </section>
     );
 }

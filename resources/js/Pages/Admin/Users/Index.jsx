@@ -1,4 +1,4 @@
-import { Link, router } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 import {
     Table,
     TableHeader,
@@ -7,22 +7,19 @@ import {
     TableRow,
     TableData,
     Caption,
-    Button,
 } from "../../Components";
 
 export default function Index({ users }) {
     return (
         <>
             <div className="mb-4">
-                <Button
-                    onClick={() => {
-                        router.visit("/admin/users/create", {
-                            method: "GET",
-                        });
-                    }}
+                <Link
+                    href="/admin/users/create"
+                    className="text-white font-bold"
+                    preserveState
                 >
                     Create User
-                </Button>
+                </Link>
             </div>
             <Table>
                 <Caption
@@ -31,16 +28,22 @@ export default function Index({ users }) {
                 />
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Username</TableHead>
+                        <TableHead>Name</TableHead>
                         <TableHead>Email</TableHead>
+                        <TableHead>Phone</TableHead>
+                        <TableHead>Job</TableHead>
+                        <TableHead>Company</TableHead>
                         <TableHead />
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {users.map((user) => (
                         <TableRow body key={user.id}>
-                            <TableData>{user.username}</TableData>
+                            <TableData>{`${user.lastName}, ${user.firstName}`}</TableData>
                             <TableData>{user.email}</TableData>
+                            <TableData>{user.phone}</TableData>
+                            <TableData>{user.job}</TableData>
+                            <TableData>{user.company}</TableData>
                             <TableData>
                                 <div className="flex items-center justify-end gap-x-4">
                                     <Link

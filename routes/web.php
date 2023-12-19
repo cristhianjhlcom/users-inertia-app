@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Public\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::inertia('/', 'Public/Index');
+Route::get('/', [HomeController::class, 'index']);
+
 Route::inertia('/about', 'Public/About');
 Route::inertia('/contact', 'Public/Contact');
 
