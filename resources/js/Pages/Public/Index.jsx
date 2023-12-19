@@ -23,9 +23,13 @@ export default function Index({ users, randomUser }) {
                 ))}
             </ul>
             <div className="fixed bottom-5 right-5 bg-gray-800 p-4 rounded space-y-6">
-                <h3 className="font-semibold">{randomUser.email}</h3>
+                {randomUser ? (
+                    <h3 className="font-semibold">{randomUser.email}</h3>
+                ) : null}
                 <Link
                     href="/"
+                    preserveScroll
+                    only={["randomUser"]}
                     className="block text-center bg-blue-500 p-2 font-bold rounded"
                 >
                     Random User
