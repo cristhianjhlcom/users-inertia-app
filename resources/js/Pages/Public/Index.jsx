@@ -9,12 +9,12 @@ export default function Index({ users, randomUser }) {
             <ul className="divide-y divide-gray-200 dark:divide-gray-700 pb-14">
                 {users.map((user) => (
                     <li key={user.email} className="py-4">
-                        <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+                        <div className="flex items-center space-x-4 rtl:space-x-reverse">
+                            <div className="flex-1 min-w-0">
+                                <p className="text-sm font-bold text-gray-900 truncate dark:text-white">
                                     {user.firstName} {user.lastName}
                                 </p>
-                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                                     {user.email}
                                 </p>
                             </div>
