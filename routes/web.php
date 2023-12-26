@@ -7,13 +7,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::post('/', [HomeController::class, 'store']);
-Route::post('/example', function () {
-    dd('This is a POST in example');
-});
-Route::get('/about', [AboutController::class, 'randomUser']);
-Route::post('/about', [AboutController::class, 'store']);
-Route::put('/about/{user}', [AboutController::class, 'update']);
-Route::delete('/about/{user}', [AboutController::class, 'destroy']);
+Route::post('/example', fn () => dd('This is a POST in example'));
+
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+Route::post('/about', [AboutController::class, 'store'])->name('about.store');
+Route::put('/about/{user}', [AboutController::class, 'update'])->name('about.update');
+Route::delete('/about/{user}', [AboutController::class, 'destroy'])->name('about.destroy');
 
 Route::inertia('/contact', 'Public/Contact');
 

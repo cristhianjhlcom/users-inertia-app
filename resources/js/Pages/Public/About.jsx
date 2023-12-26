@@ -1,4 +1,4 @@
-import { router } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 import { useState } from "react";
 
 function Button({ onClick, children }) {
@@ -13,53 +13,29 @@ function Button({ onClick, children }) {
     );
 }
 
+function Content({ state }) {
+    if (state.loading) return <h2>Cargando...</h2>;
+
+    if (state.error) return <h2>{state.error}</h2>;
+
+    return (
+        <div>
+            <pre>{JSON.stringify(state.data, null, 2)}</pre>
+        </div>
+    );
+}
+
 export default function About() {
-    const [content, setContent] = useState("");
+    const { randomUser } = usePage().props;
+    const [state, setState] = useState({
+        data: randomUser,
+        loading: false,
+        error: null,
+    });
 
-    function handleGetUser() {
-        router.visit("/about", {
-            method: "GET",
-            preserveState: true,
-            preserveScroll: true,
-            only: ["randomUser"],
-            onBefore: (visit) => console.log("on before", visit),
-            onStart: (visit) => console.log("on start", visit),
-            onProgress: (progress) => console.log("on progress", progress),
-            onSuccess: (page) => {
-                const { randomUser } = page.props;
-                setContent(randomUser);
-            },
-            onError: (errors) => console.log("on error", errors),
-            onFinish: (visit) => console.log("on finish", visit),
-        });
-    }
+    function handleGetUser() { }
 
-    function handlePost() {
-        router.post("/about", {
-            name: "Cristhian",
-            age: 29,
-        }, {
-            onSuccess: (page) => setContent(page.props.message),
-        });
-    }
-
-    function handleUpdate() {
-        router.put("/about/1", {
-            name: "Victor",
-            age: 20,
-        }, {
-            onSuccess: (page) => setContent(page.props.message),
-        });
-    }
-
-    function handleDestroy() {
-        router.delete("/about/1", {
-            onError: (page) => {
-                console.log(page)
-                setContent(page.props.message)
-            }
-        });
-    }
+    function handlePost() { }
 
     return (
         <>
@@ -70,12 +46,8 @@ export default function About() {
             >
                 <Button onClick={handleGetUser}>Get</Button>
                 <Button onClick={handlePost}>Post</Button>
-                <Button onClick={handleUpdate}>Update</Button>
-                <Button onClick={handleDestroy}>Delete</Button>
             </div>
-            <div>
-                <pre>{JSON.stringify(content)}</pre>
-            </div>
+            <Content state={state} />
         </>
     );
 }
