@@ -11,6 +11,7 @@ class AboutController extends Controller
 {
     public function index(): Response
     {
+        sleep(3);
         $randomUser = User::inRandomOrder()->first();
 
         return Inertia::render('Public/About', [
