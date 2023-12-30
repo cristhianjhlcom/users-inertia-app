@@ -24,9 +24,6 @@ class UserResource extends JsonResource
             'job' => $this->profile->job->name,
             'company' => $this->profile->company->name,
             'email' => $this->email,
-            'showUrl' => route('admin.users.show', $this),
-            'editUrl' => route('admin.users.edit', $this),
-            'destroyUrl' => route('admin.users.destroy', $this),
         ];
     }
 }

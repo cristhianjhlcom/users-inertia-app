@@ -13,7 +13,7 @@ export default function Index({ users }) {
     return (
         <>
             <div className="mb-4">
-                <Link href={users.createUrl} className="text-white font-bold">
+                <Link href={route('admin.users.create')} className="text-white font-bold">
                     Create User
                 </Link>
             </div>
@@ -43,20 +43,20 @@ export default function Index({ users }) {
                             <TableData>
                                 <div className="flex items-center justify-end gap-x-4">
                                     <Link
-                                        class="font-bold text-gray-600 dark:text-gray-500 hover:underline"
-                                        href={user.showUrl}
+                                        className="font-bold text-gray-600 dark:text-gray-500 hover:underline"
+                                        href={route('admin.users.show', user)}
                                     >
                                         View
                                     </Link>
                                     <Link
-                                        class="font-bold text-blue-600 dark:text-blue-500 hover:underline"
-                                        href={user.editUrl}
+                                        className="font-bold text-blue-600 dark:text-blue-500 hover:underline"
+                                        href={route('admin.users.edit', user)}
                                     >
                                         Edit
                                     </Link>
                                     <Link
-                                        class="font-bold text-red-600 dark:text-red-500 hover:underline"
-                                        href={user.destroyUrl}
+                                        className="font-bold text-red-600 dark:text-red-500 hover:underline"
+                                        href={route('admin.users.destroy', user)}
                                     >
                                         Remove
                                     </Link>

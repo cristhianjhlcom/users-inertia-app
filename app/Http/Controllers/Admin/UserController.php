@@ -16,7 +16,6 @@ class UserController extends Controller
 
         return Inertia::render('Admin/Users/Index', [
             'users' => $users,
-            'createUrl' => route('admin.users.create'),
         ]);
     }
 

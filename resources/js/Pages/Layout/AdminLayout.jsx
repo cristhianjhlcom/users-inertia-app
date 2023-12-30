@@ -6,7 +6,7 @@ export default function AdminLayout({ children }) {
             <header>
                 <nav className="max-w-6xl py-4 mx-auto flex items-center justify-start gap-x-4">
                     <Link
-                        href="/"
+                        href={route('home.index')}
                         className="text-gray-800 dark:text-gray-100 font-bold"
                         aria-current="page"
                     >
@@ -14,21 +14,21 @@ export default function AdminLayout({ children }) {
                     </Link>
 
                     <Link
-                        href="/about"
+                        href={route('about.index')}
                         className="text-gray-800 dark:text-gray-100 font-bold"
                     >
                         About
                     </Link>
 
                     <Link
-                        href="/admin/users"
+                        href={route('admin.users.index')}
                         className="text-gray-800 dark:text-gray-100 font-bold"
                     >
                         Users
                     </Link>
 
                     <Link
-                        href="/contact"
+                        href={route('contact.index')}
                         className="text-gray-800 dark:text-gray-100 font-bold"
                     >
                         Contact
