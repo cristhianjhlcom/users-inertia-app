@@ -13,11 +13,7 @@ export default function Index({ users }) {
     return (
         <>
             <div className="mb-4">
-                <Link
-                    href="/admin/users/create"
-                    className="text-white font-bold"
-                    preserveState
-                >
+                <Link href={users.createUrl} className="text-white font-bold">
                     Create User
                 </Link>
             </div>
@@ -48,19 +44,19 @@ export default function Index({ users }) {
                                 <div className="flex items-center justify-end gap-x-4">
                                     <Link
                                         class="font-bold text-gray-600 dark:text-gray-500 hover:underline"
-                                        href={`/admin/users/${user.id}`}
+                                        href={user.showUrl}
                                     >
                                         View
                                     </Link>
                                     <Link
                                         class="font-bold text-blue-600 dark:text-blue-500 hover:underline"
-                                        href={`/admin/users/${user.id}/edit`}
+                                        href={user.editUrl}
                                     >
                                         Edit
                                     </Link>
                                     <Link
                                         class="font-bold text-red-600 dark:text-red-500 hover:underline"
-                                        href={`/admin/users/${user.id}/destroy`}
+                                        href={user.destroyUrl}
                                     >
                                         Remove
                                     </Link>

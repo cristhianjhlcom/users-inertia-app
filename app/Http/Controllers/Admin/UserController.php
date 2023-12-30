@@ -14,7 +14,10 @@ class UserController extends Controller
     {
         $users = UserResource::collection(User::all());
 
-        return Inertia::render('Admin/Users/Index', compact('users'));
+        return Inertia::render('Admin/Users/Index', [
+            'users' => $users,
+            'createUrl' => route('admin.users.create'),
+        ]);
     }
 
     public function show(User $user): Response

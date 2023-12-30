@@ -14,4 +14,12 @@ Route::post('/about', [AboutController::class, 'store'])->name('about.store');
 
 Route::inertia('/contact', 'Public/Contact');
 
-Route::resource('/admin/users', UserController::class)->only(['index', 'show', 'create', 'edit', 'store', 'update', 'destroy']);
+Route::resource('/admin/users', UserController::class)->only([
+    'index',
+    'show',
+    'create',
+    'edit',
+    'store',
+    'update',
+    'destroy',
+])->names('admin.users');
