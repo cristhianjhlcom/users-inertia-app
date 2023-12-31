@@ -1,4 +1,12 @@
-export default function FormSelect({ id, label, options, value, onChange }) {
+export default function FormSelect({
+    id,
+    label,
+    options,
+    disabled,
+    value,
+    onChange,
+    errors = null,
+}) {
     return (
         <div className="space-y-2">
             <label
@@ -9,16 +17,19 @@ export default function FormSelect({ id, label, options, value, onChange }) {
             </label>
             <select
                 id={id}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                defaultValue=""
+                className="disabled:opacity-50 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                disabled={disabled}
                 value={value}
                 onChange={onChange}
             >
-                <option selected>Choose One</option>
+                <option>Choose One</option>
                 {options.map((option) => (
-                    <option value={option.value}>{option.label}</option>
+                    <option key={option.value} value={option.value}>
+                        {option.label}
+                    </option>
                 ))}
             </select>
+            {errors ? <small className="text-red-500">{errors}</small> : null}
         </div>
     );
 }

@@ -1,4 +1,4 @@
-export default function FormControl({
+export default function FormTextarea({
     id,
     label,
     placeholder,
@@ -16,7 +16,7 @@ export default function FormControl({
             >
                 {label}
             </label>
-            <input
+            <textarea
                 type={type}
                 id={id}
                 disabled={disabled}
