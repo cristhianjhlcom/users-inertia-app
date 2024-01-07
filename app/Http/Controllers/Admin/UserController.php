@@ -45,7 +45,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(StoreUserRequest $request)
+    public function store(StoreUserRequest $request): Redirect
     {
         $user = User::create([
             'email' => $request->input('email'),
@@ -65,6 +65,22 @@ class UserController extends Controller
 
     public function edit(User $user): Response
     {
-        return Inertia::render('Admin/Users/Edit', compact('user'));
+        $user = new UserResource($user);
+
+        $jobs = Job::all()->map(fn ($job) => [
+            'label' => $job->name,
+            'value' => $job->id,
+        ]);
+
+        $companies = Company::all()->map(fn ($company) => [
+            'label' => $company->name,
+            'value' => $company->id,
+        ]);
+
+        return Inertia::render('Admin/Users/Edit', [
+            'user' => $user,
+            'companies' => $companies,
+            'jobs' => $jobs,
+        ]);
     }
 }
