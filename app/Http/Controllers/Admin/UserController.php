@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\RedirectResponse;
 use Inertia\{Inertia, Response};
 use App\Models\{User, Company, Job};
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redirect;
 use App\Http\Resources\Admin\UserResource;
 use App\Http\Requests\Admin\StoreUserRequest;
+use App\Http\Requests\Admin\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -45,7 +46,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(StoreUserRequest $request): Redirect
+    public function store(StoreUserRequest $request): RedirectResponse
     {
         $user = User::create([
             'email' => $request->input('email'),
@@ -82,5 +83,26 @@ class UserController extends Controller
             'companies' => $companies,
             'jobs' => $jobs,
         ]);
+    }
+
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
+    {
+        sleep(4);
+        $user->email = $request->input('email');
+        $user->save();
+        $profile = $user->profile;
+
+        if ($profile) {
+            $profile->update([
+                'first_name' => $request->input('firstName'),
+                'last_name' => $request->input('lastName'),
+                'phone' => $request->input('phone'),
+                'address' => $request->input('address'),
+                'job_id' => $request->input('job'),
+                'company_id' => $request->input('company'),
+            ]);
+        }
+
+        return to_route('admin.users.index');
     }
 }

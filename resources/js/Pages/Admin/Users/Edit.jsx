@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
     Button,
     Form,
@@ -6,46 +5,69 @@ import {
     FormSelect,
     FormTextarea,
 } from "../../Components";
+import { useForm } from "@inertiajs/react";
 
 function getSelectedValue(arr, value) {
     const item = arr.find((element) => element.label.toLowerCase() === value.toLowerCase());
     return item.value;
 }
 
-export default function Edit({ user, companies, jobs, errors }) {
-    const [state] = useState({
-        form: {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            phone: user.phone,
-            address: user.address ?? '',
-            job: getSelectedValue(jobs, user.job),
-            company: getSelectedValue(companies, user.company),
-            biography: user.biography ?? '',
-        },
-        processing: false,
+export default function Edit({ user, companies, jobs }) {
+    const { data, errors, setData, setError, cancel, isDirty, put, transform, processing } = useForm({
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        address: user.address ?? '',
+        job: getSelectedValue(jobs, user.job),
+        company: getSelectedValue(companies, user.company),
+        biography: user.biography ?? '',
     });
 
     function handleChange(event) {
         const key = event.target.id;
         const value = event.target.value;
-        console.log({ key, value });
+
+        if (errors[key]) {
+            setError(key, null);
+        }
+
+        setData(key, value);
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-        //
+        transform((data) => ({
+            ...data,
+            job: Number(data.job),
+            company: Number(data.company),
+        }));
+
+        if (data.firstName === 'hola') {
+            setError({
+                firstName: 'error por escribir hola',
+                lastName: 'error en first name',
+            });
+            return;
+        }
+
+        put(route('admin.users.update', user), {
+            preserveState: true,
+            preserveScroll: true,
+            // onSuccess: () => reset('firstName'),
+        });
     }
 
     return (
         <Form onSubmit={handleSubmit}>
+            {isDirty ? <small className="text-white">Hay cambios sin guardar</small> : null}
             <FormControl
                 id="firstName"
                 label="First Name"
                 placeholder="John"
-                disabled={state.processing}
-                value={state.form.firstName}
+                disabled={processing}
+                value={data.firstName}
                 onChange={handleChange}
                 errors={errors.firstName}
             />
@@ -53,8 +75,8 @@ export default function Edit({ user, companies, jobs, errors }) {
                 id="lastName"
                 label="Last Name"
                 placeholder="Doe"
-                disabled={state.processing}
-                value={state.form.lastName}
+                disabled={processing}
+                value={data.lastName}
                 onChange={handleChange}
                 errors={errors.lastName}
             />
@@ -63,8 +85,8 @@ export default function Edit({ user, companies, jobs, errors }) {
                 label="Email"
                 placeholder="johndoe@mail.com"
                 type="email"
-                disabled={state.processing}
-                value={state.form.email}
+                disabled={processing}
+                value={data.email}
                 onChange={handleChange}
                 errors={errors.email}
             />
@@ -73,8 +95,8 @@ export default function Edit({ user, companies, jobs, errors }) {
                 label="Phone Number"
                 placeholder="999222333"
                 type="tel"
-                disabled={state.processing}
-                value={state.form.phone}
+                disabled={processing}
+                value={data.phone}
                 onChange={handleChange}
                 errors={errors.phone}
             />
@@ -82,26 +104,26 @@ export default function Edit({ user, companies, jobs, errors }) {
                 id="address"
                 label="Address"
                 placeholder="Av. Address. St. 20"
-                disabled={state.processing}
-                value={state.form.address}
+                disabled={processing}
+                value={data.address}
                 onChange={handleChange}
                 errors={errors.address}
             />
             <FormSelect
                 id="job"
                 label="Choose a Job"
-                disabled={state.processing}
+                disabled={processing}
                 options={jobs}
-                value={state.form.job}
+                value={data.job}
                 onChange={handleChange}
                 errors={errors.job}
             />
             <FormSelect
                 id="company"
                 label="Choose a Company"
-                disabled={state.processing}
+                disabled={processing}
                 options={companies}
-                value={state.form.company}
+                value={data.company}
                 onChange={handleChange}
                 errors={errors.company}
             />
@@ -109,13 +131,16 @@ export default function Edit({ user, companies, jobs, errors }) {
                 id="biography"
                 label="Biografía"
                 placeholder="Tell me something about you?"
-                disabled={state.processing}
-                value={state.form.biography}
+                disabled={processing}
+                value={data.biography}
                 onChange={handleChange}
                 errors={errors.biography}
             />
-            <Button type="submit" disabled={state.processing}>
-                {state.processing ? "Guardando" : "Update User"}
+            <Button type="submit" disabled={processing}>
+                {processing ? "Guardando" : "Update User"}
+            </Button>
+            <Button type="button" disabled={!processing} onClick={() => cancel()}>
+                Cancel
             </Button>
         </Form>
     );
