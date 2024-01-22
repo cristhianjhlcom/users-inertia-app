@@ -10,3 +10,5 @@ export { default as Form } from './Form';
 export { default as FormControl } from './FormControl';
 export { default as FormSelect } from './FormSelect';
 export { default as FormTextarea } from './FormTextarea';
+export { default as FileUpload } from './FileUpload';
+export { default as Avatar } from './Avatar';

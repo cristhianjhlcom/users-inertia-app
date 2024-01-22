@@ -24,6 +24,7 @@ class UserResource extends JsonResource
             'job' => $this->profile->job->name,
             'company' => $this->profile->company->name,
             'email' => $this->email,
+            'image' => $this->profile->image ? asset($this->profile->image) : null,
         ];
     }
 }

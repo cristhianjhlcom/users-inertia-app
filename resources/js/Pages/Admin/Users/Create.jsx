@@ -1,12 +1,12 @@
-import { useReducer } from "react";
 import {
     Button,
     Form,
     FormControl,
     FormSelect,
     FormTextarea,
+    FileUpload,
 } from "../../Components";
-import { router } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 
 const DEFAULT_FORM_STATE = {
     firstName: "",
@@ -17,78 +17,38 @@ const DEFAULT_FORM_STATE = {
     biography: "",
     job: "",
     company: "",
+    image: null,
 };
 
-const INITIAL_STATE = {
-    form: DEFAULT_FORM_STATE,
-    processing: false,
-};
-
-const ACTION = {
-    UPDATE_FIELD: "UPDATE_FIELD",
-    START_PROCESSING: "START_PROCESSING",
-    STOP_PROCESSING: "STOP_PROCESSING",
-};
-
-function reducer(state, action) {
-    switch (action.type) {
-        case ACTION.UPDATE_FIELD:
-            return {
-                ...state,
-                form: {
-                    ...state.form,
-                    [action.payload.key]: action.payload.value,
-                },
-            };
-        case ACTION.START_PROCESSING:
-            return {
-                ...state,
-                processing: true,
-            };
-        case ACTION.STOP_PROCESSING:
-            return {
-                ...state,
-                processing: false,
-            };
-        default:
-            return state;
-    }
-}
-
-export default function Create({ companies, jobs, errors }) {
-    const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+export default function Create({ companies, jobs }) {
+    const { data, errors, processing, setData, post } = useForm(DEFAULT_FORM_STATE);
 
     function handleChange(event) {
         const key = event.target.id;
         const value = event.target.value;
-        dispatch({
-            type: ACTION.UPDATE_FIELD,
-            payload: { key, value },
-        });
+
+        setData(key, value);
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-        router.post(route('admin.users.store'), state.form, {
+        post(route('admin.users.store'), {
             preserveState: true,
             preserveScroll: true,
-            onBefore: () => {
-                dispatch({ type: ACTION.START_PROCESSING });
-            },
-            onFinish: () => {
-                dispatch({ type: ACTION.STOP_PROCESSING });
-            },
         });
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form
+            onSubmit={handleSubmit}
+            encType='multipart/form-data'
+        >
             <FormControl
                 id="firstName"
                 label="First Name"
                 placeholder="John"
-                disabled={state.processing}
-                value={state.form.firstName}
+                disabled={processing}
+                value={data.firstName}
                 onChange={handleChange}
                 errors={errors.firstName}
             />
@@ -96,8 +56,8 @@ export default function Create({ companies, jobs, errors }) {
                 id="lastName"
                 label="Last Name"
                 placeholder="Doe"
-                disabled={state.processing}
-                value={state.form.lastName}
+                disabled={processing}
+                value={data.lastName}
                 onChange={handleChange}
                 errors={errors.lastName}
             />
@@ -106,8 +66,8 @@ export default function Create({ companies, jobs, errors }) {
                 label="Email"
                 placeholder="johndoe@mail.com"
                 type="email"
-                disabled={state.processing}
-                value={state.form.email}
+                disabled={processing}
+                value={data.email}
                 onChange={handleChange}
                 errors={errors.email}
             />
@@ -116,8 +76,8 @@ export default function Create({ companies, jobs, errors }) {
                 label="Phone Number"
                 placeholder="999222333"
                 type="tel"
-                disabled={state.processing}
-                value={state.form.phone}
+                disabled={processing}
+                value={data.phone}
                 onChange={handleChange}
                 errors={errors.phone}
             />
@@ -125,26 +85,26 @@ export default function Create({ companies, jobs, errors }) {
                 id="address"
                 label="Address"
                 placeholder="Av. Address. St. 20"
-                disabled={state.processing}
-                value={state.form.address}
+                disabled={processing}
+                value={data.address}
                 onChange={handleChange}
                 errors={errors.address}
             />
             <FormSelect
                 id="job"
                 label="Choose a Job"
-                disabled={state.processing}
+                disabled={processing}
                 options={jobs}
-                value={state.form.job}
+                value={data.job}
                 onChange={handleChange}
                 errors={errors.job}
             />
             <FormSelect
                 id="company"
                 label="Choose a Company"
-                disabled={state.processing}
+                disabled={processing}
                 options={companies}
-                value={state.form.company}
+                value={data.company}
                 onChange={handleChange}
                 errors={errors.company}
             />
@@ -152,13 +112,25 @@ export default function Create({ companies, jobs, errors }) {
                 id="biography"
                 label="Biografía"
                 placeholder="Tell me something about you?"
-                disabled={state.processing}
-                value={state.form.biography}
+                disabled={processing}
+                value={data.biography}
                 onChange={handleChange}
                 errors={errors.biography}
             />
-            <Button type="submit" disabled={state.processing}>
-                {state.processing ? "Guardando" : "Create User"}
+            <FileUpload
+                id="image"
+                onChange={(event) => {
+                    handleChange({
+                        target: {
+                            id: 'image',
+                            value: event.target.files[0],
+                        },
+                    })
+                }}
+                disabled={processing}
+            />
+            <Button type="submit" disabled={processing}>
+                {processing ? "Guardando" : "Create User"}
             </Button>
         </Form>
     );

@@ -52,14 +52,21 @@ class UserController extends Controller
             'email' => $request->input('email'),
         ]);
 
-        $user->profile()->create([
+        $profile = [
             'first_name' => $request->input('firstName'),
             'last_name' => $request->input('lastName'),
             'phone' => $request->input('phone'),
             'address' => $request->input('address'),
             'job_id' => $request->input('job'),
             'company_id' => $request->input('company'),
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('public/profiles');
+            $profile['image'] = '/storage/profiles/' . basename($imagePath);
+        }
+
+        $user->profile()->create($profile);
 
         return to_route('admin.users.index');
     }

@@ -29,6 +29,7 @@ class ProfileFactory extends Factory
             'bio' => fake()->text(),
             'job_id' => fake()->randomElement($jobIds),
             'company_id' => fake()->randomElement($companyIds),
+            'image' => null,
         ];
     }
 }

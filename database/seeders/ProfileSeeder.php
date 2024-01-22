@@ -14,7 +14,7 @@ class ProfileSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::factory(100)->create();
+        $users = User::factory(10)->create();
 
         $users->each(fn ($user) => $user->profile()->save(Profile::factory()->make()));
     }

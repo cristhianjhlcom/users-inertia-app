@@ -1,5 +1,6 @@
 import { Link } from "@inertiajs/react";
 import {
+    Avatar,
     Table,
     TableHeader,
     TableBody,
@@ -24,6 +25,7 @@ export default function Index({ users }) {
                 />
                 <TableHeader>
                     <TableRow>
+                        <TableHead />
                         <TableHead>Name</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>Phone</TableHead>
@@ -35,6 +37,7 @@ export default function Index({ users }) {
                 <TableBody>
                     {users.map((user) => (
                         <TableRow body key={user.id}>
+                            <TableData><Avatar src={user.image} alt={user.firstName} /></TableData>
                             <TableData>{`${user.lastName}, ${user.firstName}`}</TableData>
                             <TableData>{user.email}</TableData>
                             <TableData>{user.phone}</TableData>
