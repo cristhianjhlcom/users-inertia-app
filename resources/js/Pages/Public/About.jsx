@@ -1,4 +1,4 @@
-import { router, usePage } from "@inertiajs/react";
+import { Head, router, usePage } from "@inertiajs/react";
 import { useState } from "react";
 
 function Button({ disabled, onClick, children }) {
@@ -50,7 +50,7 @@ function Content({ state, setState }) {
 }
 
 export default function About() {
-    const { randomUser } = usePage().props;
+    const { randomUser, name, description } = usePage().props;
     const [state, setState] = useState({
         data: randomUser,
         loading: false,
@@ -59,10 +59,7 @@ export default function About() {
     });
 
     function handleGetUser() {
-        router.get(
-            "/about",
-            {},
-            {
+        router.get("/about", {}, {
                 preserveState: true,
                 preserveScroll: true,
                 only: ["randomUser"],
@@ -103,13 +100,10 @@ export default function About() {
     }
 
     function handlePost() {
-        router.post(
-            "/about",
-            {
+        router.post("/about", {
                 name: "Cristhian",
                 age: 29,
-            },
-            {
+            }, {
                 preserveState: true,
                 preserveScroll: true,
                 onCancelToken: (cancelToken) => {

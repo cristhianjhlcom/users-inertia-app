@@ -17,6 +17,7 @@ function getDefaultLayout(page) {
 }
 
 createInertiaApp({
+  title: (title) => `${title} - User App`,
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
     let page =  pages[`./Pages/${name}.jsx`];
