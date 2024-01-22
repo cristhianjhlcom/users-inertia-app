@@ -48,6 +48,7 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request): RedirectResponse
     {
+        sleep(5);
         $user = User::create([
             'email' => $request->input('email'),
         ]);

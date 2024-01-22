@@ -2,6 +2,7 @@ export default function FileUpload({
     id,
     label,
     disabled,
+    progress,
     onChange,
 }) {
     return (
@@ -19,6 +20,11 @@ export default function FileUpload({
                 type="file"
                 onChange={onChange}
             />
+            {progress ? (
+                <progress value={progress.percentage} max={100}>
+                    {progress.percentage}%
+                </progress>
+            ) : null}
         </>
     );
 }

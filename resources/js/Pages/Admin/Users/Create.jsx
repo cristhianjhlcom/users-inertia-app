@@ -21,7 +21,7 @@ const DEFAULT_FORM_STATE = {
 };
 
 export default function Create({ companies, jobs }) {
-    const { data, errors, processing, setData, post } = useForm(DEFAULT_FORM_STATE);
+    const { data, errors, processing, progress, setData, post } = useForm(DEFAULT_FORM_STATE);
 
     function handleChange(event) {
         const key = event.target.id;
@@ -119,14 +119,13 @@ export default function Create({ companies, jobs }) {
             />
             <FileUpload
                 id="image"
-                onChange={(event) => {
-                    handleChange({
-                        target: {
-                            id: 'image',
-                            value: event.target.files[0],
-                        },
-                    })
-                }}
+                onChange={(event) => handleChange({
+                    target: {
+                        id: 'image',
+                        value: event.target.files[0],
+                    },
+                })}
+                progress={progress}
                 disabled={processing}
             />
             <Button type="submit" disabled={processing}>
