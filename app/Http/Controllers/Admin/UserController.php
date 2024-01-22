@@ -48,7 +48,6 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request): RedirectResponse
     {
-        sleep(5);
         $user = User::create([
             'email' => $request->input('email'),
         ]);
@@ -69,7 +68,7 @@ class UserController extends Controller
 
         $user->profile()->create($profile);
 
-        return to_route('admin.users.index');
+        return to_route('admin.users.index')->with('success', 'Se creo correctamente');
     }
 
     public function edit(User $user): Response

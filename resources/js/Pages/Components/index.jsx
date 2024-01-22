@@ -12,3 +12,5 @@ export { default as FormSelect } from './FormSelect';
 export { default as FormTextarea } from './FormTextarea';
 export { default as FileUpload } from './FileUpload';
 export { default as Avatar } from './Avatar';
+export { default as Notification } from './Notification';
+
