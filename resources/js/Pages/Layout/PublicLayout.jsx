@@ -1,4 +1,5 @@
 import { Head, Link, usePage } from "@inertiajs/react";
+import { AuthMenu } from "../Components";
 
 function NavLink({ isActive, url, label }) {
     const activeClass = isActive
@@ -26,6 +27,7 @@ export default function PublicLayout({ children }) {
                         <NavLink isActive={url === "/about"} url={route('about.index')} label="About" />
                         <NavLink isActive={url === "/admin/users"} url={route('admin.users.index')} label="Users" />
                         <NavLink isActive={url === "/contact"} url={route('contact.index')} label="Contact" />
+                        <AuthMenu />
                     </nav>
                 </header>
                 <main className="max-w-6xl mx-auto space-y-4">{children}</main>

@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    @routes
-    @viteReactRefresh
-    @vite('resources/css/app.css')
-    @vite('resources/js/app.jsx')
-    @inertiaHead
-  </head>
-  <body class="bg-slate-200 dark:bg-slate-900">
-    @inertia
-  </body>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- Scripts -->
+        @routes
+        @viteReactRefresh
+        @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
+        @inertiaHead
+    </head>
+    <body class="bg-gray-200 dark:bg-gray-900 font-sans antialiased">
+        @inertia
+    </body>
 </html>

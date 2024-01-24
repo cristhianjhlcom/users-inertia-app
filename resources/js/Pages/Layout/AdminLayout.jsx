@@ -1,8 +1,9 @@
 import { Link, usePage } from "@inertiajs/react";
-import { Notification } from "../Components";
+import { AuthMenu, Notification } from "../Components";
 
 export default function AdminLayout({ children }) {
     const { notification } = usePage().props;
+
     return (
         <div className="bg-slate-200 dark:bg-slate-900 space-y-6 h-full">
             <header>
@@ -35,6 +36,7 @@ export default function AdminLayout({ children }) {
                     >
                         Contact
                     </Link>
+                    <AuthMenu />
                 </nav>
             </header>
             <main className="max-w-6xl mx-auto">

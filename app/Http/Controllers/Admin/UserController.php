@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Inertia\{Inertia, Response};
 use App\Models\{User, Company, Job};
 use App\Http\Controllers\Controller;
@@ -17,6 +18,9 @@ class UserController extends Controller
         $users = UserResource::collection(User::latest()->get());
 
         return Inertia::render('Admin/Users/Index', [
+            'can' => [
+                'create' => Auth::user()->can('create', User::class),
+            ],
             'users' => $users,
         ]);
     }
@@ -48,6 +52,8 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request): RedirectResponse
     {
+        $this->authorize('create', Auth::user());
+
         $user = User::create([
             'email' => $request->input('email'),
         ]);
@@ -95,6 +101,8 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
         sleep(4);
+        $this->authorize('update', Auth::user());
+
         $user->email = $request->input('email');
         $user->save();
         $profile = $user->profile;
@@ -111,5 +119,10 @@ class UserController extends Controller
         }
 
         return to_route('admin.users.index');
+    }
+
+    public function destroy(User $user): RedirectResponse
+    {
+        $this->authorize('delete', Auth::user());
     }
 }

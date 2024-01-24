@@ -4,6 +4,7 @@ namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class UserResource extends JsonResource
 {
@@ -25,6 +26,10 @@ class UserResource extends JsonResource
             'company' => $this->profile->company->name,
             'email' => $this->email,
             'image' => $this->profile->image ? asset($this->profile->image) : null,
+            'can' => [
+                'update' => Auth::user()->can('update', Auth::user()),
+                'delete' => Auth::user()->can('delete', Auth::user()),
+            ],
         ];
     }
 }

@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import {
     Avatar,
     Table,
@@ -11,12 +11,15 @@ import {
 } from "../../Components";
 
 export default function Index({ users }) {
+    const { can } = usePage().props;
     return (
         <>
             <div className="mb-4">
-                <Link href={route('admin.users.create')} className="text-white font-bold">
-                    Create User
-                </Link>
+                {can.create ? (
+                    <Link href={route('admin.users.create')} className="text-white font-bold">
+                        Create User
+                    </Link>
+                ) : null}
             </div>
             <Table>
                 <Caption
@@ -51,18 +54,22 @@ export default function Index({ users }) {
                                     >
                                         View
                                     </Link>
-                                    <Link
-                                        className="font-bold text-blue-600 dark:text-blue-500 hover:underline"
-                                        href={route('admin.users.edit', user)}
-                                    >
-                                        Edit
-                                    </Link>
-                                    <Link
-                                        className="font-bold text-red-600 dark:text-red-500 hover:underline"
-                                        href={route('admin.users.destroy', user)}
-                                    >
-                                        Remove
-                                    </Link>
+                                    {user.can.update ? (
+                                        <Link
+                                            className="font-bold text-blue-600 dark:text-blue-500 hover:underline"
+                                            href={route('admin.users.edit', user)}
+                                        >
+                                            Edit
+                                        </Link>
+                                    ) : null}
+                                    {user.can.delete ? (
+                                        <Link
+                                            className="font-bold text-red-600 dark:text-red-500 hover:underline"
+                                            href={route('admin.users.destroy', user)}
+                                        >
+                                            Remove
+                                        </Link>
+                                    ) : null}
                                 </div>
                             </TableData>
                         </TableRow>
