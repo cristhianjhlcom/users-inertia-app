@@ -14,5 +14,5 @@ export { default as FileUpload } from './FileUpload';
 export { default as Avatar } from './Avatar';
 export { default as Notification } from './Notification';
 export { default as AuthMenu } from './AuthMenu';
-
+export { default as PageLoader } from './PageLoader';
 
