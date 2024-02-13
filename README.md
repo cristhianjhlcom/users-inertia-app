@@ -28,11 +28,11 @@ Inertia.js es un framework JavaScript que ayuda a construir aplicaciones web int
 
 Puedes seguirme en mis redes sociales en los enlaces a continuación.
 
-► https://cristhianjhl.com/
-► https://www.facebook.com/cristhianjhlcom
-► https://www.twitch.tv/cristhianjhlcom
-► https://twitter.com/cristhianjhlcom
-► https://discord.com/invite/atzzuqgB
-► https://github.com/cristhianjhlcom/
+- ► [Sitio Web](https://cristhianjhl.com/)
+- ► [Facebook](https://www.facebook.com/cristhianjhlcom)
+- ► [Twitch](https://www.twitch.tv/cristhianjhlcom)
+- ► [X](https://twitter.com/cristhianjhlcom)
+- ► [Discord](https://discord.com/invite/atzzuqgB)
 
+<br />
 <p align="center"><a href="https://www.youtube.com/@cristhianjhlcom?sub_confirmation=1" target="_blank"><img src="public/assets/image/subscribe-button.png" width="1200" alt="Inertia JS Course"></a></p>
