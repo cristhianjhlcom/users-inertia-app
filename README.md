@@ -2,7 +2,7 @@
 
 Inertia.js es un framework JavaScript que ayuda a construir aplicaciones web interactivas sin la necesidad de recargar completamente la página. Se centra en la creación de experiencias de usuario fluidas y rápidas al aprovechar tecnologías como Vue.js o React, pero sin la complejidad de una arquitectura de aplicación de una sola página (SPA).
 
-<p align="center"><a href="https://www.youtube.com/playlist?list=PLs6-qUGNfXBlGn1b3kGzclzM32B9OXDUI" target="_blank"><img src="public/assets/image/inertia-repo.webp" width="400" alt="Inertia JS Course"></a></p>
+<p align="center"><a href="https://www.youtube.com/playlist?list=PLs6-qUGNfXBlGn1b3kGzclzM32B9OXDUI" target="_blank"><img src="public/assets/image/inertia-repo.webp" width="1200" alt="Inertia JS Course"></a></p>
 
 ## Tabla de Contenido
 
@@ -23,3 +23,16 @@ Inertia.js es un framework JavaScript que ayuda a construir aplicaciones web int
 15. [¿Cómo se Aplica Autenticación a un Proyecto Inertia JS?](https://youtu.be/uvGUfMw7o44?si=AzlLUKZ28xQP6G23)
 16. [¿Cómo se Aplica Autorización a un Proyecto Inertia JS?](https://youtu.be/YjovF96gSmY?si=31uJTsJLZCHmuZtk)
 17. [Mejorando la UX con una Carga de Pantalla](https://youtu.be/oJcyWPAa7VY?si=fBznefn7LVWdtSyT)
+
+## Contacto
+
+Puedes seguirme en mis redes sociales en los enlaces a continuación.
+
+► https://cristhianjhl.com/
+► https://www.facebook.com/cristhianjhlcom
+► https://www.twitch.tv/cristhianjhlcom
+► https://twitter.com/cristhianjhlcom
+► https://discord.com/invite/atzzuqgB
+► https://github.com/cristhianjhlcom/
+
+<p align="center"><a href="https://www.youtube.com/@cristhianjhlcom?sub_confirmation=1" target="_blank"><img src="public/assets/image/subscribe-button.png" width="1200" alt="Inertia JS Course"></a></p>
